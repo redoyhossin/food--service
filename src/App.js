@@ -1,25 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './header/Header';
+
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Home from './home/Home';
+import About from './about/About';
+import Blog from './blog/Blog';
+import Shop from './shop/Shop';
+import SingleShop from './shop/singleshope/SingleShop';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header></Header>
+      <Routes>
+        <Route path='/Home' element={<Home />} />
+        <Route path='/About' element={<About />} />
+        <Route path='/Blog' element={<Blog />} />
+        <Route path='/Shop' element={<Shop />} />
+        <Route path='/SingleShop' loader={async () => {
+          return fetch(`https://www.themealdb.com/api/json/v1/1/categories ${SingleShop}`)
+         }} element={<SingleShop/>} />
+
+      </Routes>
+
     </div>
+
   );
 }
+
 
 export default App;
